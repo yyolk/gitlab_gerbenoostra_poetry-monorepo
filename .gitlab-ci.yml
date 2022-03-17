@@ -1,0 +1,38 @@
+include:
+  - local: "poetry-package.gitlab-ci.yml"
+
+.packages_matrix: &packages-matrix
+  parallel:
+    matrix:
+      - PKG: ["package-a", "package-b"]
+
+mypy:
+  <<: *packages-matrix
+
+poetry check:
+  <<: *packages-matrix
+
+style:
+  <<: *packages-matrix
+
+build option1:
+  <<: *packages-matrix
+
+build option2:
+  <<: *packages-matrix
+
+# Cannot use the packages-matrix, as variables aren't allowed within 'dependencies'
+# Therefore explicitly enumerating
+publish package-a:
+  extends: .publish
+  variables:
+    PKG: "package-a"
+  dependencies:
+    - "build option1: [package-a]"
+
+publish package-b:
+  extends: .publish
+  variables:
+    PKG: "package-b"
+  dependencies:
+    - "build option1: [package-b]"

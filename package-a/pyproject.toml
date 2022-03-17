@@ -1,0 +1,27 @@
+[project]
+name = "package-a"
+version = "0.1.0"
+description = "Package A"
+
+[tool.poetry]
+name = "package-a"
+version = "0.1.0"
+description = "Package A"
+license = "MIT"
+authors = ["Gerben Oostra <gerben.oostra@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "package_a" }]
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "~3.8"
+
+[tool.poetry.dev-dependencies]
+ipython = "^7.29.0"
+mypy = "0.910"
+flake8 = "4.0.1"
+dunamai = "^1.7.0"
+commitizen = "^2.20.3"

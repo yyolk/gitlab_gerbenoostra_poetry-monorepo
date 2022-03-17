@@ -18,7 +18,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 python = "~3.8"
-package-a = "~0.1.0"
+package-a = {path="../package-a", develop=true}
 pydantic = "^1.9.0"
 
 [tool.poetry.dev-dependencies]

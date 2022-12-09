@@ -1,7 +1,6 @@
-[project]
-name = "package-b"
-version = "0.1.0"
-description = "Package B"
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "package-b"
@@ -10,20 +9,13 @@ description = "Package B"
 license = "MIT"
 authors = ["Gerben Oostra <gerben.oostra@gmail.com>"]
 readme = "README.md"
+include = ["VERSION", "README.md", "CHANGELOG.md"]
 packages = [{ include = "package_b" }]
-
-[build-system]
-requires = ["poetry_core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 python = "~3.8"
 package-a = {path="../package-a", develop=true}
-pydantic = "^1.9.0"
 
-[tool.poetry.dev-dependencies]
-ipython = "^7.29.0"
+[tool.poetry.group.dev.dependencies]
 mypy = "0.910"
 flake8 = "4.0.1"
-dunamai = "^1.7.0"
-commitizen = "^2.20.3"

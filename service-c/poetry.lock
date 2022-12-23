@@ -58,6 +58,22 @@ type = "directory"
 url = "../package-a"
 
 [[package]]
+name = "package-b"
+version = "0.1.0"
+description = "Package B"
+category = "main"
+optional = false
+python-versions = "~3.8"
+develop = true
+
+[package.dependencies]
+package-a = {path = "../package-a", develop = true}
+
+[package.source]
+type = "directory"
+url = "../package-b"
+
+[[package]]
 name = "pycodestyle"
 version = "2.8.0"
 description = "Python style guide checker"
@@ -92,7 +108,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8"
-content-hash = "2a8f280bd14bb1f338f68d0b3a49ea8e7d544e9c013071b80d3dc71d468a0436"
+content-hash = "40c96623732aaa07fd6dbfbbc1a6a45043c798ed68c88cf01a950b1412e91f7c"
 
 [metadata.files]
 flake8 = [
@@ -133,6 +149,7 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
 package-a = []
+package-b = []
 pycodestyle = [
     {file = "pycodestyle-2.8.0-py2.py3-none-any.whl", hash = "sha256:720f8b39dde8b293825e7ff02c475f3077124006db4f440dcbc9a20b76548a20"},
     {file = "pycodestyle-2.8.0.tar.gz", hash = "sha256:eddd5847ef438ea1c7870ca7eb78a9d47ce0cdb4851a5523949f2601d0cbbe7f"},

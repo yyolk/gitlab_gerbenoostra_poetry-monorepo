@@ -3,17 +3,18 @@ requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "package-a"
+name = "service-c"
 version = "0.1.0"
-description = "Package A"
+description = "Provides lambda handler"
 license = "MIT"
 authors = ["Gerben Oostra <gerben.oostra@gmail.com>"]
 readme = "README.md"
-include = ["VERSION", "README.md", "CHANGELOG.md"]
-packages = [{ include = "package_a" }]
+include = ["VERSION"]
+packages = [{ include = "service_c" }]
 
 [tool.poetry.dependencies]
 python = "~3.8"
+package-b = {path="../package-b", develop=true}
 
 [tool.poetry.group.dev.dependencies]
 mypy = "0.910"

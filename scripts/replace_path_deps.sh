@@ -18,7 +18,7 @@ for TARFILE in $TARFILES
 do
     rm -rf /tmp/version_update
     mkdir -p /tmp/version_update
-    tar -C /tmp/version_update -xf $curdir/$TARFILE
+    tar -C /tmp/version_update -xvf $curdir/$TARFILE
     cd /tmp/version_update
     # Replace the path dependencies (which are prefixed with '@')
     # with compatible version to the current monorepo, but at least at the current one.

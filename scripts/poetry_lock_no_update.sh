@@ -1,6 +1,7 @@
 #!/bin/sh
-# This script reflects the latest changes of pyproject.lock into the virtualenv
-#  by running `poetry install --sync`
+# This script reflects the latest changes of pyproject.toml
+#  into both the poetry.lock file and the virtualenv.
+#  by running `poetry lock --no-update && poetry install --sync`
 # It first configures poetry to use the right python for creation of the virtual env
 set -x
 set -u
@@ -16,5 +17,5 @@ for p in $_projects
 do
   cd "${DIR}/../${p}" || exit
   (pyenv local && poetry env use $(which python)) || poetry env use 3.8
-  poetry install --sync
+  poetry lock --no-update && poetry install --sync
 done

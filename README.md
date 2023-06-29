@@ -37,7 +37,12 @@ To create the poetry virtual environments:
 ```shell
 scripts/poetry_install.sh
 ```
-It might update the `poetry.lock` files, which is mainly usefull when running on new architectures.
+
+If you install while also updating the lock files, you can run 
+```shell
+scripts/poetry_lock_no_update.sh
+```
+This checks consistency of the `poetry.lock` files before updating the virtualenv. This can be usefull when running on new architectures.
 
 If a new dependency has been added to any of the poetry file, run the helper script to update all lock files:
 ```shell

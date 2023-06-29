@@ -1,0 +1,7 @@
+#!/bin/sh
+# Example post-checkout hook to update all your local virtualenvs whenever you switch or update branches
+# Copy (or append the contents of) this file to .git/hooks/post-checkout
+flag=$3
+if [[ "$flag" -eq 1 ]];then
+  scripts/poetry_install.sh
+fi

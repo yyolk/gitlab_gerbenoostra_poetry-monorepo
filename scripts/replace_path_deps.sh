@@ -18,7 +18,7 @@ for TARFILE in $TARFILES
 do
     rm -rf /tmp/version_update
     mkdir -p /tmp/version_update
-    tar -C /tmp/version_update -xf $curdir/$TARFILE
+    tar -C /tmp/version_update -xvf $curdir/$TARFILE
     cd /tmp/version_update
     # Replace the path dependencies (which are prefixed with '@')
     # with compatible version to the current monorepo, but at least at the current one.
@@ -30,7 +30,7 @@ do
     # Therefore we use ~=1.2, which equals >=1.2,<2.0, together with >=1.2.3
     FOLDER=$(ls)
     sed -i$SEP'' "s|^Requires-Dist: \(.*\) @ \.\./.*|Requires-Dist: \1 (~=$VERSION_MINOR,>=$VERSION)|" "$FOLDER/PKG-INFO"
-    sed -i$SEP'' "s| @ \.\.[a-zA-Z\-_/]*|~=$VERSION_MINOR,>=$VERSION|" "$FOLDER/setup.py"
+    sed -i$SEP'' "s| @ \.\.[a-zA-Z\-_/]*|~=$VERSION_MINOR,>=$VERSION|" "$FOLDER/setup.py" || echo "No setup.py found"
     sed -i$SEP'' "s|{.*path.*\.\..*|\"~$VERSION\"|" "$FOLDER/pyproject.toml"
     tar -czvf new.tar.gz "$FOLDER"
     mv new.tar.gz $curdir/$TARFILE

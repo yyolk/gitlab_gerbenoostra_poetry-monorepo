@@ -5,3 +5,4 @@ dist/
 *.whl
 *.tar.gz
 requirements.txt
+info/

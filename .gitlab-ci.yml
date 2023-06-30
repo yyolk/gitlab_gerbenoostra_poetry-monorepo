@@ -48,22 +48,19 @@ cache:
 
 .pyenv-prep_root: &pyenv-prep-root
   - python -m pip install --upgrade pip
-  - pip install --upgrade virtualenv poetry
+  - pip install --upgrade virtualenv poetry==1.5.1
   - poetry install --sync
 
 .pyenv-prep_pkg: &pyenv-prep-pkg
   - python -m pip install --upgrade pip
-  - pip install --upgrade virtualenv poetry
+  - pip install --upgrade virtualenv poetry==1.5.1
   - cd $PKG
   - poetry install --sync
 
 .pyenv-prep_all: &pyenv-prep-all
   - python -m pip install --upgrade pip
-  - pip install --upgrade virtualenv poetry
-  - poetry install --sync
-  - cd package-a && poetry install --sync && cd ..
-  - cd package-b && poetry install --sync && cd ..
-  - cd service-c && poetry install --sync && cd ..
+  - pip install --upgrade virtualenv poetry==1.5.1
+  - scripts/poetry_install.sh
 
 mypy:
   <<: *packages-matrix
@@ -90,6 +87,8 @@ style:
     - poetry run flake8 .
 
 build all:
+  # one version, in which we replace the path dependencies in pyproject.toml of all packages
+  # and then build everything (the versions will propagate into the dependency specs of the artifacts)
   stage: build packages
   before_script:
     - *pyenv-prep-all
@@ -102,6 +101,8 @@ build all:
       - "**/dist/"
 
 build:
+  # alternatively, in which we build each package independently
+  # after building the artifacts, we replace the path dependencies in the created files
   <<: *packages-matrix
   stage: build packages
   before_script:
